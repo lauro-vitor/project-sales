@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressesTable extends Migration
+class AddEnterpriseToProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->string('street');
-            $table->string('complement');
-            $table->string('state');
-            $table->string('city');
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            //
+            $table->unsignedBigInteger('enterprise_id');
+            $table->foreign('enterprise_id')->references('id')->on('enterprises');
         });
     }
 
@@ -30,6 +27,8 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::table('products', function (Blueprint $table) {
+            //
+        });
     }
 }
