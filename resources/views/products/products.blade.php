@@ -5,7 +5,8 @@
             type="button" 
             class="btn btn-primary mb-3" 
             data-toggle="modal" 
-            data-target="#productFormDialog" >
+            data-target="#productFormDialog" 
+            onclick="clearFormOfProduct()">
                 Novo Produto
         </button>
     </div>
@@ -30,9 +31,14 @@
     </table>
     @component('products.formProduct')
     @endcomponent
+    
 @endsection
 
 @section('javascript')
-    @component('componentsjs.productjs')
-    @endcomponent
+    @component('products.jsProduct') @endcomponent
+    @component('products.jsCreateProduct') @endcomponent
+    @component('products.jsRemoveProduct') @endcomponent
+    @component('products.jsEditProduct') @endcomponent
+    @component('products.jsSubmitForm') @endcomponent
+    @component('categories.jsCategories') @endcomponent
 @endsection

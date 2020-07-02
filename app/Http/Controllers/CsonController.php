@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Cson;
 class CsonController extends Controller
 {
     /**
@@ -14,6 +14,12 @@ class CsonController extends Controller
     public function index()
     {
         //
+        $cson = new Cson();
+        $csons = $cson->getAll();
+        $response =  ($csons['httpCode'] == 201) ? 
+             json_encode($csons[0]) : 
+             $csons[0];
+        return $response;
     }
 
     /**

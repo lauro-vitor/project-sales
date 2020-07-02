@@ -5,14 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 class CategoryController extends Controller
-{
+{   
+    private $category;
+    public function __construct(){
+        $this->category = new Category();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function viewIndex() {
+        return view('categories.categories');
+    }
     public function index()
-    {
+    {   
         $category = new Category();
         $categories = $category->getAll();
         if($categories['httpCode'] == 201){
@@ -29,6 +36,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -39,7 +47,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auxCategory = new Category();
+        $category = $request->only($auxCategory->getFillable());
+        $result = $auxCategory->createCategory($category);
+        return response()->json($result, 200);
     }
 
     /**

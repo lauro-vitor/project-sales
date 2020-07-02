@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Aliquot;
 class AliquotController extends Controller
 {
     /**
@@ -12,8 +12,14 @@ class AliquotController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         //
+        $aliquot = new Aliquot();
+        $aliquots = $aliquot->getAll();
+        if($aliquots['httpCode'] == 201){
+            return json_encode($aliquots[0]);
+        }
+        return $aliquots[0];
     }
 
     /**

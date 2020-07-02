@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Ncm;
 class NcmController extends Controller
 {
     /**
@@ -14,6 +14,12 @@ class NcmController extends Controller
     public function index()
     {
         //
+        $ncm = new Ncm();
+        $ncms =$ncm->getAll();
+        if($ncms['httpCode'] == 201){
+            return json_encode($ncms[0]);
+        }
+        return $ncms[0];
     }
 
     /**

@@ -5,7 +5,11 @@ use Illuminate\Http\Request;
 use App\Product;
 
 class ProductController extends Controller
-{   
+{     
+    protected $product;
+    public function __construct(Product $product) {
+        $this->product = $product;
+    }
     public function viewIndex(){
         return view('products.products');
     }
@@ -32,6 +36,7 @@ class ProductController extends Controller
     public function create()
     {   
         //
+       
     }
 
     /**
@@ -43,6 +48,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $auxProduct = new Product();
+        $product = $request->only($auxProduct->getFillable());
+        $result = $auxProduct->createProduct($product);
+        return json_encode($result);
     }
 
     /**
@@ -70,7 +79,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -82,7 +91,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = $request->only($this->product->getFillable());
+        $response = $this->product->updateProduct($product, $id);
+        return response()->json($response, 200);
     }
 
     /**
@@ -94,5 +105,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $product = new Product();
+        $result = $product->destroyProduct($id);
+        return $result;
     }
 }
