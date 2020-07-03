@@ -56,7 +56,8 @@
     }
     //aliquots
     function loadingAliquots(){
-        $.getJSON('/api/aliquots', function (aliquots){
+        $.getJSON('/api/aliquots', function (response){
+            let aliquots = response.aliquots;
             aliquots.map( function(aliquot) {
                 let option = 
                     '<option value = "' + aliquot.id + '" >' +
@@ -68,7 +69,8 @@
         });
     }
     function loadingCsons() {
-        $.getJSON('/api/csons', function(csons) {
+        $.getJSON('/api/csons', function(response) {
+            let csons = response.csons;
             csons.map(function (cson) {
                 let option = 
                     '<option value = "' + cson.id + '" >' +

@@ -1,4 +1,4 @@
-<script>
+<script>    
    function loadingNcm() {
        $.getJSON('/api/ncms', function(ncms) {
            ncms.map(function(ncm) {

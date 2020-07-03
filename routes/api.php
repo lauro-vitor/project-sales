@@ -18,7 +18,9 @@ Route::resource('/categories', 'CategoryController');
 Route::resource('/ncms', 'NcmController');
 Route::resource('/aliquots', 'AliquotController');
 Route::resource('/csons', 'CsonController');
-
+Route::resource('/enterprises','EnterpriseController');
+Route::resource('/addresses','AddressController');
+Route::resource('/contacts','ContactController');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

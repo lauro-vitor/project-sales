@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layout.app');
 });
+Route::get('/enterprise', 'EnterpriseController@viewIndex');
+Route::get('/csons', 'CsonController@viewIndex');
+Route::get('/aliquots', 'AliquotController@viewIndex');
 Route::get('/ncms', 'NcmController@viewIndex');
 Route::get('/categories', 'CategoryController@viewIndex');
 Route::get('/products', 'ProductController@viewIndex');

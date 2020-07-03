@@ -63,8 +63,9 @@ class NcmController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $ncm = $this->ncm->getById($id);
+        return response()->json($ncm, 200);
     }
 
     /**
@@ -87,7 +88,9 @@ class NcmController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $auxNcm = $request->only($this->ncm->getFillable());
+        $res = $this->ncm->updateNcm($auxNcm, $id);
+        return response()->json($res, 200);
     }
 
     /**
@@ -98,6 +101,6 @@ class NcmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json($this->ncm->destroyNcm($id), 200);
     }
 }

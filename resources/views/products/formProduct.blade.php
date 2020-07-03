@@ -72,16 +72,24 @@
                    </div>
                     <div class="form-row">
                        
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="aliquot">Alíquota</label>
                             <select name="aliquot" id="aliquot" class="form-control">
                                 
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-2" style="margin-top: 6.2%; margin-right: 35px;">
+                            <button class="btn btn-primary"
+                            onclick="openWindow('http://localhost:8000/aliquots')">detalhes</button>
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="cson">CSON</label>
                             <select name="cson" id="cson" class="form-control">
                             </select>
+                        </div>
+                        <div class="form-group col-md-2" style="margin-top: 6.2%;">
+                            <button class="btn btn-primary"
+                            onclick="openWindow('http://localhost:8000/csons')">detalhes</button>
                         </div>
                     </div>
                     <div class="modal-footer">

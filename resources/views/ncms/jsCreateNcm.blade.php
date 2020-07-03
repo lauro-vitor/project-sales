@@ -1,4 +1,4 @@
-<script>
+<script>  
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN' : "{{ csrf_token() }}"
@@ -15,9 +15,11 @@
         name: $('#name').val(),
       };
      $.post('/api/ncms', ncm, function (response) {
-        let line = buildLineOfNcm(res.ncm);
-        $('#ncmsTable>tbody').append(line);
-        alert(res.message);
+       if(response.httpCode == 201) {
+          let line = buildLineOfNcm(response.ncm);
+          $('#ncmsTable>tbody').append(line);
+       }
+        alert(response.message);
      });
   }
 </script>

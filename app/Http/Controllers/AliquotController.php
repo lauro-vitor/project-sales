@@ -5,7 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Aliquot;
 class AliquotController extends Controller
-{
+{   
+
+    protected $aliquot;
+    public function __construct(){
+        $this->aliquot = new Aliquot();
+    }
+    public function viewIndex() {
+        return view('aliquots.aliquots');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class AliquotController extends Controller
         $aliquot = new Aliquot();
         $aliquots = $aliquot->getAll();
         if($aliquots['httpCode'] == 201){
-            return json_encode($aliquots[0]);
+            return response()->json($aliquots, 200);
         }
         return $aliquots[0];
     }
@@ -40,7 +48,9 @@ class AliquotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $aliquot = $request->only($this->aliquot->getFillable());
+        $newAliquot = $this->aliquot->createAliquot($aliquot);
+        return response()->json($newAliquot, 200);
     }
 
     /**
@@ -50,8 +60,8 @@ class AliquotController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   //ok
+        return response()->json($this->aliquot->getById($id), 200);
     }
 
     /**
@@ -73,8 +83,14 @@ class AliquotController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        return response()->json(
+            $this->aliquot->updateAliquot(
+                $request->only($this->aliquot->getFillable()),
+                $id
+            ), 
+            200
+        );
     }
 
     /**
@@ -85,6 +101,6 @@ class AliquotController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json($this->aliquot->destroyAliquot($id),  200);
     }
 }

@@ -11,7 +11,7 @@
                 <a href="/products" class="nav-link">Produtos</a>
             </li>
             <li class="nav-item">
-                <a href="#"class="nav-link">Empresas</a>
+                <a href="/enterprise"class="nav-link">Empresas</a>
             </li>
             <li class="nav-item">
                 <a href="#"class="nav-link">Fornecedores</a>

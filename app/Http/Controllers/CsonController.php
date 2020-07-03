@@ -5,7 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cson;
 class CsonController extends Controller
-{
+{   
+    public function viewIndex() {
+        return view('csons.csons');
+    }
+    private $cson;
+
+    public function __construct(){
+        $this->cson = new Cson();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,13 +21,7 @@ class CsonController extends Controller
      */
     public function index()
     {
-        //
-        $cson = new Cson();
-        $csons = $cson->getAll();
-        $response =  ($csons['httpCode'] == 201) ? 
-             json_encode($csons[0]) : 
-             $csons[0];
-        return $response;
+        return response()->json($this->cson->getAll(), 200);
     }
 
     /**
@@ -40,7 +42,12 @@ class CsonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(
+            $this->cson->createCson(
+                $request->only($this->cson->getFillable())
+            ),
+            200
+        );
     }
 
     /**
@@ -51,7 +58,7 @@ class CsonController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json($this->cson->getById($id), 200);
     }
 
     /**
@@ -73,8 +80,10 @@ class CsonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $csonToUpdate = $request->only($this->cson->getFillable());
+        $res = $this->cson->updateCson($csonToUpdate, $id);
+        return response()->json($res, 200);
     }
 
     /**
@@ -85,6 +94,9 @@ class CsonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json(
+            $this->cson->destroyCson($id),
+            200
+        );
     }
 }

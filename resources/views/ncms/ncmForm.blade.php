@@ -1,8 +1,8 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="ncmFormDialog">
+<div class="modal fade" tabindex="-1" role="dialog" id="ncmFormDialog"> 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-title">
-                <h4>Novo NCM</h4>
+                <h4>NCM</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="ncmForm">

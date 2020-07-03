@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Contact;
 class ContactController extends Controller
 {
     /**
@@ -11,9 +11,13 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $contact;
+    public function __construct(){
+        $this->contact = new Contact();
+    }
     public function index()
     {
-        //
+       return "index";
     }
 
     /**
@@ -33,8 +37,10 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $contact = $request->only($this->contact->getFillable());
+        dd($request);
+        return response()->json($this->contact->createContact($contact), 200, $headers);
     }
 
     /**
@@ -45,7 +51,7 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json($this->contact->getById($id), 200);
     }
 
     /**
@@ -67,8 +73,9 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $contact = $request->only($this->contact->getFillable());
+        return response()->json($this->contact->updateContact($contact,$id), 200);
     }
 
     /**
@@ -79,6 +86,6 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json($this->contact->destroyContact($id), 200);
     }
 }
