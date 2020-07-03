@@ -5,38 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <title>Document</title>
+    <title>NCMS</title>
 </head>
-<body>
-
+<body >
     <div style="text-align: center;">
-        <h1 class="card-title">Categorias</h1>
+        <h1>NCMS</h1>
     </div>
     <button 
         type="button" 
-        class="btn btn-primary mb-3 ml-2" 
+        class="btn btn-primary mb-3" 
         data-toggle="modal" 
-        data-target="#categoryDialog" 
-        onclick="clearForm()">
-                Nova +
+        data-target="#ncmFormDialog" 
+        onclick="clearFormOfNcm()">
+        Novo +
     </button>
-    <table class="table table-hover" id="categoriesTable">
-        <thead>
+    <table class="table table-hover" id="ncmsTable">
+        <thead   >
             <tr>
+                <th>ID</th>
                 <th>Código</th>
                 <th>Nome</th>
                 <th>Opções</th>
             </tr>
         </thead>
         <tbody>
+
         </tbody>
     </table>
-    @component('categories.formCategory') @endcomponent
 </body>
 </html>
 <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
-@component('categories.jsLoadingCategories') @endcomponent
-@component('categories.jsCreateCategory') @endcomponent
-@component('categories.jsEditCategory')  @endcomponent
-@component('categories.jsRemoveCategory')  @endcomponent
-@component('categories.jsSubmitForm')  @endcomponent
+@component('ncms.jsLoadingNcms')
+    
+@endcomponent

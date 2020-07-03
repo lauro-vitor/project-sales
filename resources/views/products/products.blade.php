@@ -1,13 +1,13 @@
 @extends('layout.app',['current' => 'produtos'])
 @section('body')
-    <div style="text-align: end; margin-right: 8%;">
+    <div class="ml-2">
         <button 
             type="button" 
             class="btn btn-primary mb-3" 
             data-toggle="modal" 
             data-target="#productFormDialog" 
             onclick="clearFormOfProduct()">
-                Novo Produto
+                Novo +
         </button>
     </div>
     <table class="table table-hover" id="productsTable" >
@@ -40,5 +40,9 @@
     @component('products.jsRemoveProduct') @endcomponent
     @component('products.jsEditProduct') @endcomponent
     @component('products.jsSubmitForm') @endcomponent
-    @component('categories.jsCategories') @endcomponent
+    <script>
+        function openWindow(url) {
+            window.open(url,'DescriptiveWindowName','esizable,scrollbars,status');
+        }
+    </script>
 @endsection

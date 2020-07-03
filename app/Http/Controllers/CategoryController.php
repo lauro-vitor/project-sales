@@ -7,6 +7,7 @@ use App\Category;
 class CategoryController extends Controller
 {   
     private $category;
+
     public function __construct(){
         $this->category = new Category();
     }
@@ -61,7 +62,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json($this->category->getById($id), 200);
     }
 
     /**
@@ -84,7 +85,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $categoryToUpdate = $request->only($this->category->getFillable());
+        $res = $this->category->updateCategory($categoryToUpdate, $id);
+        return response()->json($res, 200);
     }
 
     /**
@@ -95,6 +98,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = $this->category->destroyCategory($id);
+        return response()->json($res, 200);
     }
 }

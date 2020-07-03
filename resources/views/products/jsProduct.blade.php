@@ -79,11 +79,12 @@
             });
         });
     }
+  
      $(function(){
-            loadingProducts();
             loadingCategories();
             loadingNcms();
             loadingAliquots();
             loadingCsons();
+            loadingProducts();
         })
 </script>

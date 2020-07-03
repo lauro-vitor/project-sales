@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ncm;
 class NcmController extends Controller
-{
+{   
+    public function viewIndex()
+    {
+        return view('ncms.ncms');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,7 @@ class NcmController extends Controller
         $ncm = new Ncm();
         $ncms =$ncm->getAll();
         if($ncms['httpCode'] == 201){
-            return json_encode($ncms[0]);
+            return response()->json($ncms[0], 200);
         }
         return $ncms[0];
     }

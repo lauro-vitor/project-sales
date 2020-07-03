@@ -54,16 +54,20 @@
                         </div>
                         <div class="form-group col-md-2" style="margin-top: 6.2%;">
                             <button class="btn btn-primary"
-                            onclick="openCategories()">detalhes</button>
+                            onclick="openWindow('http://localhost:8000/categories')">detalhes</button>
                         </div>
                     </div>
                     
                    <div class="form-row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-10">
                             <label for="">NCM</label>
                             <select name="ncms" id="ncms" class="form-control">
                                 
                             </select>
+                        </div>
+                        <div class="form-group col-md-2" style="margin-top: 6.2%;">
+                            <button class="btn btn-primary"
+                            onclick="openWindow('http://localhost:8000/ncms')">detalhes</button>
                         </div>
                    </div>
                     <div class="form-row">
