@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Ncm;
 class NcmController extends Controller
 {   
+    private $ncm;
+
+    public function __construct()
+    {
+        $this->ncm = new Ncm();
+    }
     public function viewIndex()
     {
         return view('ncms.ncms');
@@ -33,7 +39,7 @@ class NcmController extends Controller
      */
     public function create()
     {
-        //
+    
     }
 
     /**
@@ -45,6 +51,9 @@ class NcmController extends Controller
     public function store(Request $request)
     {
         //
+        $newNcm = $request->only($this->ncm->getFillable());
+        $response = $this->ncm->createNcm($newNcm);
+        return response()->json($response, 200);
     }
 
     /**

@@ -39,9 +39,14 @@
 
         </tbody>
     </table>
+    @component('ncms.ncmForm');
+        
+    @endcomponent
 </body>
 </html>
 <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
-@component('ncms.jsLoadingNcms')
-    
-@endcomponent
+@component('ncms.jsLoadingNcms')    @endcomponent
+@component('ncms.jsCreateNcm')  @endcomponent
+@component('ncms.jsEditNcm')    @endcomponent
+@component('ncms.jsRemoveNcm')  @endcomponent
+@component('ncms.jsSubmitForm') @endcomponent
