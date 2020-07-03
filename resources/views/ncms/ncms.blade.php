@@ -6,6 +6,13 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <title>NCMS</title>
+    <style>
+        td {
+        max-width: 70ch;
+            
+        white-space: wrap;
+    }
+    </style>
 </head>
 <body >
     <div style="text-align: center;">
@@ -13,7 +20,7 @@
     </div>
     <button 
         type="button" 
-        class="btn btn-primary mb-3" 
+        class="btn btn-primary mb-3 ml-2" 
         data-toggle="modal" 
         data-target="#ncmFormDialog" 
         onclick="clearFormOfNcm()">

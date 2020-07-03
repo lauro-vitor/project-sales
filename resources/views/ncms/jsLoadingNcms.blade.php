@@ -14,8 +14,8 @@
             `<td> ${ncm.code} </td>` +
             `<td> ${ncm.name} </td>` +
             '<td>' +
-                `<button class="btn btn-warning btn-sm" onClick="editNcm(${ncm.id})">Editar</button>`+
-                `<button class="btn btn-danger btn-sm" onClick="removeNcm(${ncm.id})">Remover</button>` +
+                `<button class="btn btn-warning mr-2" onClick="editNcm(${ncm.id})">Editar</button>`+
+                `<button class="btn btn-danger" onClick="removeNcm(${ncm.id})">Remover</button>` +
             '</td>' +
         '</tr>'
     );
