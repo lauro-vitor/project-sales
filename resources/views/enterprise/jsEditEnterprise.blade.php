@@ -18,29 +18,55 @@
         });
     }
     function sentUpdate(contact, address, enterprise){
-        updateContact(contact, address, enterprise);
+
+        updateEnterprise(contact, address, enterprise);
+        
     }
-   
+    function updateEnterprise(contact, address, enterprise) {
+        $.ajax({
+            type: 'PUT',
+            url: `/api/enterprises/${enterprise.id}`,
+            data: enterprise,
+            success: async function(response) {
+                if(response.httpCode == 201) {
+                    let enterprise = response.enterprises;
+                    await updateContact(contact, address, enterprise);
+                    let line = document.getElementById(enterprise.id);
+                    line.cells[1].innerHTML = enterprise.name;
+                    line.cells[2].innerHTML = enterprise.fantasy_name;
+                    line.cells[3].innerHTML = enterprise.cnpj;
+                    line.cells[4].innerHTML = enterprise.register_state;
+                    alert(response.message);
+                } else {
+                    let msg = 'algum erro ocorreu ao alterar o endereço da empresa\n' + response.message;
+                    alert(msg);
+                }
+            },
+            error: function(error) {
+                alert(error.responseJSON.message);
+            }
+        });
+    }
+    
     function updateContact(contact, address, enterprise) {
         $.ajax({
             type: 'PUT',
             url: `/api/contacts/${contact.id}`,
             data: contact,
-            success: function(response) {
+            success: async function(response) {
                 if(response.httpCode == 201) {
+                    await updateAddress(address, enterprise);
                     let contact = response.contact;
                     let line = document.getElementById(enterprise.id);
                     line.cells[5].innerHTML = contact.email;
                     line.cells[6].innerHTML = contact.phone;
-
-                    updateAddress(address, enterprise);
                 } else {
                     let msg = 'algum erro ocorreu ao alterar o contato da empresa\n' + response.message;
                     alert(msg);
                 }
             },
             error: function(error) {
-                console.log(error);
+                alert(error.responseJSON.message);
             }
         });
     }
@@ -57,40 +83,13 @@
                     line.cells[8].innerHTML = address.complement;
                     line.cells[9].innerHTML = address.state;
                     line.cells[10].innerHTML = address.city;
-
-                    updateEnterprise(enterprise);
-
                 } else {
                     let msg = 'algum erro ocorreu ao alterar o endereço da empresa\n' + response.message;
                     alert(msg);
                 }
             },
             error: function(error) {
-                console.log(error);
-            }
-        });
-    }
-    function updateEnterprise(enterprise){
-        $.ajax({
-            type: 'PUT',
-            url: `/api/enterprises/${enterprise.id}`,
-            data: enterprise,
-            success: function(response) {
-                if(response.httpCode == 201) {
-                    let enterprise = response.enterprises;
-                    let line = document.getElementById(enterprise.id);
-                    line.cells[1].innerHTML = enterprise.name;
-                    line.cells[2].innerHTML = enterprise.fantasy_name;
-                    line.cells[3].innerHTML = enterprise.cnpj;
-                    line.cells[4].innerHTML = enterprise.register_state;
-                    alert(response.message);
-                } else {
-                    let msg = 'algum erro ocorreu ao alterar o endereço da empresa\n' + response.message;
-                    alert(msg);
-                }
-            },
-            error: function(error) {
-                console.log(error);
+               alert(error.responseJSON.message);
             }
         });
     }

@@ -24,18 +24,18 @@
     }
 
     function sentContact(contact,address, enterprise) {
-        $.post('/api/contacts',contact, function(resContact) {
+        $.post('/api/contacts', contact, async function(resContact) {
             if(resContact.httpCode = 201) {
-                sentAddress(address, enterprise,resContact);
+                await sentAddress(address, enterprise,resContact);
             } else {
                 alert(resContact.message);
             }
         });
     }
-    function sentAddress(address, enterprise, resContact){
-        $.post('/api/addresses', address, function(resAddress){
+     function sentAddress(address, enterprise, resContact){
+        $.post('/api/addresses', address, async function(resAddress){
             if(resAddress.httpCode = 201){
-                sentEnterprise(enterprise, resContact, resAddress);
+               await sentEnterprise(enterprise, resContact, resAddress);
             } else {
                 alert(resAddress.message);
             }

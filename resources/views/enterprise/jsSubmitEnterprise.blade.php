@@ -18,8 +18,8 @@
             fantasy_name: $('#fantasy_name').val(),
             cnpj: $('#cnpj').val(),
             register_state: $('#register_state').val(),
-            contact_id: $('#address_id').val(),
-            address_id: $('#contact_id').val()
+            contact_id: $('#contact_id').val(),
+            address_id: $('#address_id').val()
         };
 
         if($('#id').val() == '') {
