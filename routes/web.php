@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/  
 
 Route::get('/', function () {
     return view('layout.app');
@@ -22,3 +22,4 @@ Route::get('/aliquots', 'AliquotController@viewIndex');
 Route::get('/ncms', 'NcmController@viewIndex');
 Route::get('/categories', 'CategoryController@viewIndex');
 Route::get('/products', 'ProductController@viewIndex');
+Route::get('/providers','ProviderController@viewIndex');

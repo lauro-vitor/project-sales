@@ -21,6 +21,10 @@ Route::resource('/csons', 'CsonController');
 Route::resource('/enterprises','EnterpriseController');
 Route::resource('/addresses','AddressController');
 Route::resource('/contacts','ContactController');
+Route::resource('/type_providers','TypeProviderController');
+Route::resource('/providers','ProviderController');
+Route::resource('/clients', 'ClientController');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

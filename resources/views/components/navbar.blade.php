@@ -14,7 +14,7 @@
                 <a href="/enterprise"class="nav-link">Empresas</a>
             </li>
             <li class="nav-item">
-                <a href="#"class="nav-link">Fornecedores</a>
+                <a href="/providers"class="nav-link">Fornecedores</a>
             </li>
             <li class="nav-item">
                 <a href="#"class="nav-link">Clientes</a>

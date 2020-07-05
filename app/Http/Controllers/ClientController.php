@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Client;
 
 class ClientController extends Controller
-{
+{   
+    protected $client;
+    public function __construct()
+    {
+        $this->client = new Client();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json($this->client->getAll(), 200);
     }
 
     /**
@@ -34,7 +40,12 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(
+            $this->client->createClient(
+                $request->only($this->client->getFillable())
+            ), 
+            200
+        );
     }
 
     /**
@@ -45,7 +56,10 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(
+            $this->client->getById($id), 
+            200
+        );
     }
 
     /**
@@ -68,7 +82,13 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(
+            $this->client->updateClient(
+                $request->only($this->client->getFillable()),
+                $id
+            ), 
+            200
+        );
     }
 
     /**
@@ -79,6 +99,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json(
+            $this->client->destroyClient($id), 
+            200
+        );
     }
 }

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\TypeProvider;
 class TypeProviderController extends Controller
-{
+{   
+    protected $typeProvider;
+    public function __construct()
+    {
+        $this->typeProvider = new TypeProvider();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,7 @@ class TypeProviderController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json( $this->typeProvider->getAll(), 200);
     }
 
     /**
@@ -34,7 +39,12 @@ class TypeProviderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(
+            $this->typeProvider->createTypeProvider(
+                $request->only($this->typeProvider->getFillable())
+            ), 
+            200
+        );
     }
 
     /**
@@ -45,7 +55,7 @@ class TypeProviderController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json( $this->typeProvider->getById($id), 200);
     }
 
     /**
@@ -68,7 +78,12 @@ class TypeProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(
+            $this->typeProvider->updateTypeProvider(
+                $request->only($this->typeProvider->getFillable()), $id
+            ), 
+            200
+        );
     }
 
     /**
@@ -79,6 +94,9 @@ class TypeProviderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json(
+            $this->typeProvider->destroyTypeProvider($id), 
+            200
+        );
     }
 }

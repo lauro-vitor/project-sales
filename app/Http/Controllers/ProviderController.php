@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Provider;
 class ProviderController extends Controller
-{
+{   
+    protected $provider;
+    public function __construct()
+    {
+        $this->provider = new Provider();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        return response()->json(
+            $this->provider->getAll(), 
+            200
+        );
+    }
+    public function viewIndex(){
+        return view('providers.index');
     }
 
     /**
@@ -34,7 +45,12 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(
+            $this->provider->createProvider(
+                $request->only($this->provider->getFillable())
+            ), 
+            200
+        );
     }
 
     /**
@@ -45,7 +61,10 @@ class ProviderController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(
+            $this->provider->getById($id), 
+            200
+        );
     }
 
     /**
@@ -68,7 +87,13 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(
+            $this->provider->updateProvider(
+                $request->only($this->provider->getFillable()),
+                $id
+            ), 
+            200
+        );
     }
 
     /**
@@ -79,6 +104,9 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json(
+            $this->provider->destroyProvider($id), 
+            200
+        );
     }
 }

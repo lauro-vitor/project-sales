@@ -2,7 +2,7 @@
     function sentDelete(id) {
         serachEnterprise(id);
     }
-    //retorna a empresa como respost, caso exista irá deletar -> contato -> endereço -> empresa
+    //retorna a empresa como respost, caso exista irá deletar -> empresa -> contato -> endereço
     //cadeia de promisses
     function serachEnterprise(id) {
         $.getJSON(`/api/enterprises/${id}`, function(response){
