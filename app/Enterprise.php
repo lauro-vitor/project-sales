@@ -25,35 +25,65 @@ class Enterprise extends Model
         return $this->belongsTo('App\Address');
     }
     protected $relations = ['contact', 'address'];
-
-    public function getAll() {
+    private function responseEnterprise($enterprises, $message, $httpCode){
         return([
-            'enterprises' => $this->with($this->relations)->get(),
-            'message' => 'Empresas retornada com sucesso!',
-            'httpCode' =>201]);
-    }
-    public function getById($id){
-        $enterprise = $this->with($this->relations)->find($id);
-        if(isset($enterprise)) {
-            return([
-                'enterprise'  => $enterprise,
-                'message' => 'Empresa encotrada!',
-                'httpCode' => 201
-            ]);
-        }
-        return([
-            'enterprise'  => null,
-            'message' => 'Empresa não encotrada!',
-            'httpCode' => 500
+            'enterprises' => $enterprises,
+            'message' => $message,
+            'httpCode' => $httpCode
         ]);
     }
-    public function createEnterprise(){
-
+    //ok
+    public function getAll() {
+        $enterprises =  $this->with($this->relations)->get();
+        return $this->responseEnterprise($enterprises, 'Empresas retornada com sucesso!', 201);
     }
-    public function updateEnterprise(){
-
+    //ok
+    public function getById($id) {
+        $enterprise = $this->with($this->relations)->find($id);
+        if(isset($enterprise)) {
+           return $enterprise;
+        }
+        return null;
     }
-    public function removeEnterprise() {
-
+    //ok
+    public function createEnterprise($enterprise) {
+        $auxEnterprise = $this->create($enterprise);
+        $newEnterprise = null;
+        if(isset($auxEnterprise)) {
+            $newEnterprise = $this->getById($auxEnterprise->id);
+            return $this->responseEnterprise($newEnterprise,'Empresa inserida com sucesso', 201);
+        }
+        return $this->responseEnterprise(null, 'Não foi possível inserir a empresa', 500);
+    }
+    //
+    public function updateEnterprise($enterprise, $id){
+        $updatedEnterprise = null;
+        $oldEnterprise = $this->find($id);
+        $result = null;
+        if(isset($oldEnterprise)) {
+            $result = $oldEnterprise->update($enterprise);
+            if($result) {
+                $updatedEnterprise = $this->find($id);
+                if(isset($updatedEnterprise)) {
+                    return $this->responseEnterprise(
+                        $updatedEnterprise,
+                        'Empresa alterada com sucesso!',
+                        201 
+                    );
+                }
+            }
+        }
+        return $this->responseEnterprise(null, 'Erro ao editar empresa', 500);
+    }
+    public function destroyEnterprise($id) {
+        $enterpriseToDelete = $this->find($id);
+        $result = null;
+        if(isset($enterpriseToDelete)) {
+            $result = $enterpriseToDelete->delete();
+            if($result){
+                return $this->responseEnterprise(null, 'Empresa removida com sucesso', 201);
+            }
+        }
+        return $this->responseEnterprise(null, 'Erro ao remover empresa', 500);
     }
 }

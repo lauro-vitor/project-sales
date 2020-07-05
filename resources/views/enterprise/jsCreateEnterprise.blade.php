@@ -1,11 +1,13 @@
-<script>
+<script>    
       $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN' : "{{ csrf_token() }}"
         }
      });
     function clearForm() {
-        $('#idInput').val('');
+        $('#id').val('');
+        $('#contact_id').val('');
+        $('#address_id').val('');
         $('#name').val('');
         $('#fantasy_name').val('');
         $('#cnpj').val('');
@@ -17,39 +19,37 @@
         $('#state').val('');
         $('#city').val('');
     }
-    function createContact(){
-        let contact = {
-            email: $('#email').val(),
-            phone: $('#phone').val(),
-        }
-        $.post('/api/',contact, function(response){
+    function createEnterprise(contact, address, enterprise){
+        sentContact(contact, address, enterprise);
+    }
 
+    function sentContact(contact,address, enterprise) {
+        $.post('/api/contacts',contact, function(resContact) {
+            if(resContact.httpCode = 201) {
+                sentAddress(address, enterprise,resContact);
+            } else {
+                alert(resContact.message);
+            }
         });
     }
-    function createAddress() {
-        let address = {
-            street: $('#street').val(),
-            complement: $('#complement').val(),
-            state : $('#state').val(),
-            city: $('#city').val('')
-        }
+    function sentAddress(address, enterprise, resContact){
+        $.post('/api/addresses', address, function(resAddress){
+            if(resAddress.httpCode = 201){
+                sentEnterprise(enterprise, resContact, resAddress);
+            } else {
+                alert(resAddress.message);
+            }
+        });
     }
-    function createEnterprise(){
-      
-      let enterprise = {
-        name: $('#name').val(),
-        fantasy_name: $('#fantasy_name').val(),
-        cnpj: $('#cnpj').val(),
-        register_state: $('#register_state').val(),
-        
-      };
-     $.post('/api/enterprises', enterprise, function (response) {
-        if(response.httpCode == 201) {
-            line = buildLineOfEnterprises(response.enterprise);
-            $('#enterpriseTable>tbody').append(line);
-        }
-        alert(response.message);
-     });
-  }
-  
+    function sentEnterprise(enterprise, resContact, resAddress) {
+        enterprise.contact_id = resContact.contact.id;
+        enterprise.address_id = resAddress.address.id;
+        $.post('/api/enterprises', enterprise, function (resEnterprise) {
+            if(resEnterprise.httpCode == 201) {
+                let line = buildLineOfEnterprises(resEnterprise.enterprises);
+                $('#enterpriseTable>tbody').append(line);
+            }
+            alert(resEnterprise.message);
+        });
+    }
 </script>

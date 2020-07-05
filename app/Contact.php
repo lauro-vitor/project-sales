@@ -13,45 +13,51 @@ class Contact extends Model
         'email',
         'phone'
     ];
-    public function responseContact($contact, $message, $httpCode){
+    //ok
+    private function responseContact($contact, $message, $httpCode){
         return([
             'contact' => $contact,
             'message' => $message,
             'httpCode' => $httpCode
         ]);
     }
-    
+    public function getAll() {
+        return $this->responseContact($this->all(), 'OK',  201);
+    }
+    //ok
     public function getById($id){
         $contact = $this->find($id);
         if(isset($contact)) {
-            return responseContact($contact, 'Contato encontrado', 201);
+            return $this->responseContact($contact, 'Contato encontrado', 201);
         }
-        return responseContact(null, 'Contato não encontrado!', 500);
+        return $this->responseContact(null, 'Contato não encontrado!', 500);
     }
+    //ok
     public function createContact($contact) {
         $result = $this->create($contact);
         if(isset($result)){
             $contact = $this->find($result->id);
-            return responseContact($contact, 'Contato criado com sucesso', 201);
+            return $this->responseContact($contact, 'Contato criado com sucesso', 201);
         }
-        return responseContact(null, 'não foi possível crirar contato', 500);
+        return $this->responseContact(null, 'não foi possível crirar contato', 500);
     }
+    //ok
     public function updateContact($contact, $id) {
         $newContact = null;
-        $oldContact = $this->find($id);
+        $oldContact= $this->find($id);
         $result = null;
-        if(isset($oldContact)){
+        if(isset($oldContact)) {
             $result = $oldContact->update($contact);
-            if(isset($result)) {
+            if($result) {
                 $newContact = $this->find($id);
-                return responseContact($newContact, 'Contato atualizado com sucesso',201);
+                return $this->responseContact($newContact, 'Contato alterado com sucesso', 201);
             }
         }
-        return responseContact(null, 'Ocorreu algum erro ao atualizar o contato',500);
+        return $this->responseContact(null, 'Ocorreu algum erro ao alterar o contato', 500);
     }
-
+    //ok
     public function destroyContact($id) {
-        $contact= $this->find(id);
+        $contact= $this->find($id);
         if(isset($contact)){
             $result = $contact->delete();
             if(isset($result)){

@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="enterpriseDialog">
+<div class="modal fade" tabindex="-1" role="dialog" id="enterpriseDialog">  
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,8 +6,9 @@
             </div>
             <div class="modal-body">
                 <form class="" id="enterprise">
-                    <input type="hidden" id="idInput">
-                    
+                    <input type="hidden" id="id">
+                    <input type="hidden" id="contact_id">
+                    <input type="hidden" id="address_id">
                     <div class="form-group">
                         <label for="name">Nome:</label>
                         <input 

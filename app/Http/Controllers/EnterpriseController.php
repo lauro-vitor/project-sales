@@ -40,8 +40,14 @@ class EnterpriseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        
+        return response()->json(
+            $this->enterprise->createEnterprise(
+                $request->only($this->enterprise->getFillable())
+            ), 
+            200
+        );
     }
 
     /**
@@ -63,7 +69,7 @@ class EnterpriseController extends Controller
      */
     public function edit($id)
     {
-        //
+    
     }
 
     /**
@@ -75,7 +81,12 @@ class EnterpriseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(
+            $this->enterprise->updateEnterprise(
+                $request->only($this->enterprise->getFillable()), $id
+            ), 
+            200
+        );
     }
 
     /**
@@ -86,6 +97,6 @@ class EnterpriseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json($this->enterprise->destroyEnterprise($id), 200);
     }
 }

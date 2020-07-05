@@ -17,7 +17,7 @@ class ContactController extends Controller
     }
     public function index()
     {
-       return "index";
+        return response()->json($this->contact->getAll(), 200);
     }
 
     /**
@@ -39,8 +39,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {   
         $contact = $request->only($this->contact->getFillable());
-        dd($request);
-        return response()->json($this->contact->createContact($contact), 200, $headers);
+        return response()->json($this->contact->createContact($contact), 200);
     }
 
     /**
@@ -72,10 +71,12 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //ok
     public function update(Request $request, $id)
     {   
-        $contact = $request->only($this->contact->getFillable());
-        return response()->json($this->contact->updateContact($contact,$id), 200);
+        $contactToUpdate = $request->only($this->contact->getFillable());
+        $res = $this->contact->updateContact($contactToUpdate, $id);
+        return response()->json($res, 200);
     }
 
     /**
@@ -84,6 +85,7 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //ok
     public function destroy($id)
     {
         return response()->json($this->contact->destroyContact($id), 200);

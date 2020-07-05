@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Address ;
 
 class AddressController extends Controller
-{
+{   protected $address;
+    public function __construct(){
+        $this->address = new Address();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class AddressController extends Controller
     public function index()
     {
         //
-        return "bla bla bla";
+        return response()->json($this->address->getAll(), 200);
     }
 
     /**
@@ -35,7 +39,12 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(
+            $this->address->createAddress(
+                $request->only($this->address->getFillable())
+            )
+            , 200
+        );
     }
 
     /**
@@ -46,7 +55,7 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json($this->address->getById($id), 200);
     }
 
     /**
@@ -69,7 +78,13 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(
+            $this->address->updateAddress(
+                $request->only($this->address->getFillable()),
+                $id
+            ), 
+            200
+        );
     }
 
     /**
@@ -80,6 +95,6 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response()->json($this->address->destroyAddress($id), 200);
     }
 }
