@@ -1,6 +1,5 @@
 @extends('layout.app',['current' => 'enterprise'])  
 @section('body')
-    <h4>Empresas</h4>
     <div class="ml-2 mb-3" >
         <button
             type="button"
@@ -33,9 +32,10 @@
         
     @endcomponent
 @endsection
-@section('javascript')
+@section('javascript') 
     @component('enterprise.jsLoadingEnterprises')@endcomponent
     @component('enterprise.jsCreateEnterprise')@endcomponent
     @component('enterprise.jsEditEnterprise')@endcomponent
+    @component('enterprise.jsRemoveEnterprise')  @endcomponent
     @component('enterprise.jsSubmitEnterprise')  @endcomponent
 @endsection

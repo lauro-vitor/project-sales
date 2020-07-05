@@ -26,7 +26,7 @@
                     <button class="btn btn-warning" onClick="editEnterprise(${enterprise.id})"> 
                         Editar 
                     </button>
-                    <button class="btn btn-danger" onClick="removeEnterprise(${enterprise.id})" >
+                    <button class="btn btn-danger" onClick="sentDelete(${enterprise.id})" >
                      Apagar 
                     </button>
                 </td>
