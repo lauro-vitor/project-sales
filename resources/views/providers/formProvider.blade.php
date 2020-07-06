@@ -55,9 +55,14 @@
                         <label for="enterprise">Empresa:</label>
                         <select name="enterprise" id="enterprise" class="form-control"></select>
                     </div>
-                    <div class="form-group">
-                        <label for="type_provider">Tipo</label>
-                        <select name="type_provider" id="type_provider" class="form-control"></select>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <label for="type_provider">Tipo</label>
+                            <select name="type_provider" id="type_provider" class="form-control"></select>
+                        </div>
+                        <div class="form-group col-md-2" style="margin-top: 30px;">
+                            <button class="btn btn-primary" onclick="openTypeProviders()">detalhes</button>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Salvar</button>

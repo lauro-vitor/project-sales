@@ -11,6 +11,9 @@ class TypeProviderController extends Controller
     {
         $this->typeProvider = new TypeProvider();
     }
+    public function viewIndex(){
+        return view('type_providers.index');
+    }
     /**
      * Display a listing of the resource.
      *

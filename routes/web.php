@@ -23,3 +23,4 @@ Route::get('/ncms', 'NcmController@viewIndex');
 Route::get('/categories', 'CategoryController@viewIndex');
 Route::get('/products', 'ProductController@viewIndex');
 Route::get('/providers','ProviderController@viewIndex');
+Route::get('/type_providers','TypeProviderController@viewIndex');

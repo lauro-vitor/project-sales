@@ -31,7 +31,16 @@
     <p id="errorTable" style="visibility: hidden;">Nehum elemento foi inserido na tabela</p>
     @component('providers.formProvider') @endcomponent
 @endsection
-@section('javascript')  
+@section('javascript')
+    <script>
+        function openTypeProviders(){
+            window.open(
+                'http://localhost:8000/type_providers',
+                'DescriptiveWindowName',
+                'esizable,scrollbars,status'
+            );
+        }
+    </script>
     @component('providers.jsLoadingEnterprises') @endcomponent 
     @component('providers.jsLoadingTypeProviders') @endcomponent 
     @component('providers.jsLoadingProviders') @endcomponent 
